@@ -27,6 +27,20 @@ public class KeepsController : ControllerBase
     }
   }
 
+  [HttpGet("{keepId}")]
+  public ActionResult<Keep> GetKeepById(int keepId)
+  {
+    try
+    {
+      Keep keep = _keepsService.GetKeepById(keepId);
+      return Ok(keep);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
   [HttpPost]
   [Authorize]
   public async Task<ActionResult<Keep>> Create([FromBody] Keep newKeep)
@@ -38,6 +52,39 @@ public class KeepsController : ControllerBase
       Keep createdKeep = _keepsService.CreateKeep(newKeep);
       createdKeep.Creator = userInfo;
       return Ok(createdKeep);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
+  [HttpPut("{keepId}")]
+  [Authorize]
+  public async Task<ActionResult<Keep>> EditKeep(int keepId, [FromBody] Keep keepData)
+  {
+    try
+    {
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      keepData.Id = keepId;
+      Keep keep = _keepsService.EditKeep(keepData, userInfo.Id);
+      return Ok(keep);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
+  [HttpDelete("{keepId}")]
+  [Authorize]
+  public async Task<ActionResult<Keep>> RemoveKeep(int keepId)
+  {
+    try
+    {
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      _keepsService.RemoveKeep(keepId, userInfo.Id);
+      return Ok("Keep Deleted");
     }
     catch (Exception e)
     {

@@ -45,7 +45,7 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         name VARCHAR(255) NOT NULL,
         description VARCHAR(500) NOT NULL,
-        coverImg VARCHAR(500) NOT NULL,
-        isPrivate TINYINT NOT NULL,
+        img VARCHAR(500) NOT NULL,
+        isPrivate TINYINT NOT NULL DEFAULT 0,
         FOREIGN KEY (creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';

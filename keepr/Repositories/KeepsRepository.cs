@@ -18,9 +18,12 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
     return newKeep;
   }
 
-  public void Delete(int id)
+  public void Delete(Keep keepData)
   {
-    throw new NotImplementedException();
+    string sql = @"
+        DELETE FROM keeps WHERE id = @Id
+        ;";
+    _db.Execute(sql, keepData);
   }
 
   public List<Keep> Get()
@@ -44,11 +47,55 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
 
   public Keep GetById(int id)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    SELECT
+    k.*,
+    COUNT(vk.id) AS Kept,
+    a.*
+    FROM keeps k
+    JOIN accounts a ON a.id = k.creatorId
+    LEFT JOIN vaultkeeps vk ON vk.keepId = k.id
+    WHERE k.id = @id
+    GROUP BY k.id
+    ;";
+    return _db.Query<Keep, Profile, Keep>(sql, (k, p) =>
+    {
+      k.Creator = p;
+      return k;
+    }, new { id }).FirstOrDefault();
   }
 
-  public Keep Update(Keep data)
+  public Keep Update(Keep keepData)
   {
-    throw new NotImplementedException();
+    string sql = @"
+        UPDATE keeps SET
+          name = @name,
+          description = @description,
+          img = @img,
+          views = @views
+        WHERE id = @id
+        ;";
+    keepData.UpdatedAt = DateTime.Now;
+    int affectedRows = _db.Execute(sql, keepData);
+    if (affectedRows == 0)
+    {
+      throw new Exception("No changes made to Keep.");
+    }
+    return keepData;
+  }
+
+  public Keep UpdateViews(Keep keepData)
+  {
+    string sql = @"
+        UPDATE keeps SET
+          views = @views
+        WHERE id = @id
+        ;";
+    int affectedRows = _db.Execute(sql, keepData);
+    if (affectedRows == 0)
+    {
+      throw new Exception("No changes made to Keep.");
+    }
+    return keepData;
   }
 }

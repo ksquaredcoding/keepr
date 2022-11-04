@@ -9,6 +9,6 @@ public class Vault : IRepoItem<int>
   public Profile Creator { get; set; }
   public string Name { get; set; }
   public string Description { get; set; }
-  public string CoverImg { get; set; }
-  public bool IsPrivate { get; set; }
+  public string Img { get; set; }
+  public bool IsPrivate { get; set; } = false;
 }

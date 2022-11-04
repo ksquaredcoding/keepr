@@ -10,6 +10,6 @@ public interface IRepository<T, Tid>
 
   T Update(T data);
 
-  void Delete(Tid id);
+  void Delete(T data);
 
 }
