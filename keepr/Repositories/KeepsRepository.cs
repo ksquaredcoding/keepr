@@ -98,4 +98,19 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
     }
     return keepData;
   }
+
+  // public Keep UpdateKept(Keep keepData)
+  // {
+  //   string sql = @"
+  //       UPDATE keeps SET
+  //         kept = @kept
+  //       WHERE id = @id
+  //       ;";
+  //   int affectedRows = _db.Execute(sql, keepData);
+  //   if (affectedRows == 0)
+  //   {
+  //     throw new Exception("No changes made to Keep.");
+  //   }
+  //   return keepData;
+  // }
 }

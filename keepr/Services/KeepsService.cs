@@ -49,6 +49,12 @@ public class KeepsService
     _keepsRepository.UpdateViews(k);
   }
 
+  // public void UpdateKeepKept(Keep k)
+  // {
+  //   k.Kept++;
+  //   _keepsRepository.UpdateKept(k);
+  // }
+
   internal void RemoveKeep(int keepId, string accountId)
   {
     Keep keep = GetKeepById(keepId);
