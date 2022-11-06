@@ -61,10 +61,10 @@ public class VaultsController : ControllerBase
       Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
       if (userInfo == null)
       {
-        List<VaultKeep> vaultKeeps = _vaultKeepsService.GetVaultKeepsNoAuth(vaultId);
+        List<VaultKept> vaultKeeps = _vaultKeepsService.GetVaultKeepsNoAuth(vaultId);
         return Ok(vaultKeeps);
       }
-      List<VaultKeep> vaultKeeps2 = _vaultKeepsService.GetVaultKeeps(vaultId, userInfo.Id);
+      List<VaultKept> vaultKeeps2 = _vaultKeepsService.GetVaultKeeps(vaultId, userInfo.Id);
       return Ok(vaultKeeps2);
     }
     catch (Exception e)

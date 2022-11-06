@@ -50,7 +50,7 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
     string sql = @"
     SELECT
     k.*,
-    COUNT(vk.vaultKeepId) AS Kept,
+    COUNT(vk.id) AS Kept,
     a.*
     FROM keeps k
     JOIN accounts a ON a.id = k.creatorId
@@ -98,19 +98,4 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
     }
     return keepData;
   }
-
-  // public Keep UpdateKept(Keep keepData)
-  // {
-  //   string sql = @"
-  //       UPDATE keeps SET
-  //         kept = @kept
-  //       WHERE id = @id
-  //       ;";
-  //   int affectedRows = _db.Execute(sql, keepData);
-  //   if (affectedRows == 0)
-  //   {
-  //     throw new Exception("No changes made to Keep.");
-  //   }
-  //   return keepData;
-  // }
 }

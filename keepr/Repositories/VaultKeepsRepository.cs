@@ -8,44 +8,47 @@ public class VaultKeepsRepository : BaseRepository, IRepository<VaultKeep, int>
   public VaultKeep Create(VaultKeep vaultKeep)
   {
     string sql = @"
-        INSERT INTO vaultkeeps(vaultKeepId, vaultId, keepId, creatorId)
-        VALUES(@vaultKeepId, @vaultId, @keepId, @creatorId)
+        INSERT INTO vaultkeeps(vaultId, keepId, creatorId)
+        VALUES(@vaultId, @keepId, @creatorId);
+        SELECT LAST_INSERT_ID()
         ;";
-    _db.Execute(sql, vaultKeep);
-    vaultKeep.Id = vaultKeep.KeepId;
+    int vaultKeepId = _db.ExecuteScalar<int>(sql, vaultKeep);
+    vaultKeep.Id = vaultKeepId;
     return vaultKeep;
   }
 
   public void Delete(VaultKeep vaultKeep)
   {
     string sql = @"
-        DELETE FROM vaultkeeps WHERE vaultKeepId = @VaultKeepId
+        DELETE FROM vaultkeeps WHERE id = @Id
         ;";
     _db.Execute(sql, vaultKeep);
   }
 
-  public List<VaultKeep> GetVaultKeepsByVaultId(int vaultId)
+  public List<VaultKept> GetVaultKeepsByVaultId(int vaultId)
   {
     string sql = @"
         SELECT
         vk.*,
-        k.*,
+        COUNT(vk.id) AS Kept,
+        vk.id AS vaultKeepId,
+        vk.vaultId AS vaultId,
+        vk.keepId AS id,
         a.*,
-        COUNT(vk.vaultKeepId) AS Kept
+        k.*
         FROM vaultkeeps vk
         JOIN keeps k ON k.id = vk.keepId
         JOIN accounts a ON a.id = vk.creatorId
         WHERE vk.vaultId = @vaultId
-        GROUP BY vk.vaultKeepId
+        GROUP BY vk.id
         ;";
-    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Keep, Profile, VaultKeep>(sql, (vk, k, p) =>
+    List<VaultKept> vaultKeeps = _db.Query<VaultKept, Profile, Keep, VaultKept>(sql, (vk, p, k) =>
     {
       vk.Creator = p;
       vk.Name = k.Name;
       vk.Description = k.Description;
       vk.Img = k.Img;
       vk.Views = k.Views;
-      vk.Id = k.Id;
       return vk;
     }, new { vaultId }).ToList();
     return vaultKeeps;
@@ -62,7 +65,7 @@ public class VaultKeepsRepository : BaseRepository, IRepository<VaultKeep, int>
     SELECT
     vk.*
     FROM vaultkeeps vk
-    WHERE vk.vaultKeepId = @vaultKeepId
+    WHERE vk.id = @vaultKeepId
     ;";
     VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
     return vaultKeep;

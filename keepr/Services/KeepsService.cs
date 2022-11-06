@@ -26,6 +26,16 @@ public class KeepsService
     return keep;
   }
 
+  internal Keep GetKeepById2(int keepId)
+  {
+    Keep keep = _keepsRepository.GetById(keepId);
+    if (keep == null)
+    {
+      throw new Exception("Keep does not exist");
+    }
+    return keep;
+  }
+
   internal Keep CreateKeep(Keep newKeep)
   {
     return _keepsRepository.Create(newKeep);
@@ -48,12 +58,6 @@ public class KeepsService
   {
     _keepsRepository.UpdateViews(k);
   }
-
-  // public void UpdateKeepKept(Keep k)
-  // {
-  //   k.Kept++;
-  //   _keepsRepository.UpdateKept(k);
-  // }
 
   internal void RemoveKeep(int keepId, string accountId)
   {

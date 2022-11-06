@@ -20,25 +20,25 @@ public class VaultKeepsService
     {
       throw new Exception("You can only add Keeps to your own Vault");
     }
-    Keep keep = _keepsService.GetKeepById(newVaultKeep.KeepId);
+    Keep keep = _keepsService.GetKeepById2(newVaultKeep.KeepId);
     newVaultKeep.CreatorId = keep.CreatorId;
-    newVaultKeep.VaultKeepId = keep.Id;
+    // newVaultKeep.VaultKeepId = keep.Id;
     VaultKeep vaultKeep = _vaultKeepsRepository.Create(newVaultKeep);
-    vaultKeep.Name = keep.Name;
-    vaultKeep.Description = keep.Description;
-    vaultKeep.Img = keep.Img;
-    vaultKeep.Views = keep.Views;
-    vaultKeep.Creator = keep.Creator;
+    // vaultKeep.Name = keep.Name;
+    // vaultKeep.Description = keep.Description;
+    // vaultKeep.Img = keep.Img;
+    // vaultKeep.Views = keep.Views;
+    // vaultKeep.Creator = keep.Creator;
     return vaultKeep;
   }
 
-  internal List<VaultKeep> GetVaultKeepsNoAuth(int vaultId)
+  internal List<VaultKept> GetVaultKeepsNoAuth(int vaultId)
   {
     Vault vault = _vaultsService.GetVaultByIdNoAuth(vaultId);
     return _vaultKeepsRepository.GetVaultKeepsByVaultId(vault.Id);
   }
 
-  internal List<VaultKeep> GetVaultKeeps(int vaultId, string accountId)
+  internal List<VaultKept> GetVaultKeeps(int vaultId, string accountId)
   {
     Vault vault = _vaultsService.GetVaultById(vaultId, accountId);
     return _vaultKeepsRepository.GetVaultKeepsByVaultId(vault.Id);
