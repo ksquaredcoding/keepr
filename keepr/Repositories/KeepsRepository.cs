@@ -50,7 +50,7 @@ public class KeepsRepository : BaseRepository, IRepository<Keep, int>
     string sql = @"
     SELECT
     k.*,
-    COUNT(vk.id) AS Kept,
+    COUNT(vk.vaultKeepId) AS Kept,
     a.*
     FROM keeps k
     JOIN accounts a ON a.id = k.creatorId

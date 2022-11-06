@@ -1,6 +1,6 @@
 namespace keepr.Models;
 
-public class Keep : IRepoItem<int>
+public class Keep
 {
   public int Id { get; set; }
   public DateTime CreatedAt { get; set; }

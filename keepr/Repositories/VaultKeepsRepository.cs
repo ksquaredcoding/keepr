@@ -8,19 +8,18 @@ public class VaultKeepsRepository : BaseRepository, IRepository<VaultKeep, int>
   public VaultKeep Create(VaultKeep vaultKeep)
   {
     string sql = @"
-        INSERT INTO vaultkeeps(vaultId, keepId, creatorId)
-        VALUES(@vaultId, @keepId, @creatorId);
-        SELECT LAST_INSERT_ID()
+        INSERT INTO vaultkeeps(vaultKeepId, vaultId, keepId, creatorId)
+        VALUES(@vaultKeepId, @vaultId, @keepId, @creatorId)
         ;";
-    int vaultKeepId = _db.ExecuteScalar<int>(sql, vaultKeep);
-    VaultKeep newVaultKeep = GetById(vaultKeepId);
-    return newVaultKeep;
+    _db.Execute(sql, vaultKeep);
+    vaultKeep.Id = vaultKeep.KeepId;
+    return vaultKeep;
   }
 
   public void Delete(VaultKeep vaultKeep)
   {
     string sql = @"
-        DELETE FROM vaultkeeps WHERE id = @Id
+        DELETE FROM vaultkeeps WHERE vaultKeepId = @VaultKeepId
         ;";
     _db.Execute(sql, vaultKeep);
   }
@@ -30,19 +29,26 @@ public class VaultKeepsRepository : BaseRepository, IRepository<VaultKeep, int>
     string sql = @"
         SELECT
         vk.*,
+        k.*,
         a.*,
-        k.creatorId
+        COUNT(vk.vaultKeepId) AS Kept
         FROM vaultkeeps vk
-        LEFT JOIN keeps k ON k.id = vk.keepId
-        JOIN accounts a ON a.id = k.creatorId
+        JOIN keeps k ON k.id = vk.keepId
+        JOIN accounts a ON a.id = vk.creatorId
         WHERE vk.vaultId = @vaultId
-        GROUP BY v.id
+        GROUP BY vk.vaultKeepId
         ;";
-    return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (vaultKeep, profile) =>
+    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Keep, Profile, VaultKeep>(sql, (vk, k, p) =>
     {
-      vaultKeep.Creator = profile;
-      return vaultKeep;
-    }).ToList();
+      vk.Creator = p;
+      vk.Name = k.Name;
+      vk.Description = k.Description;
+      vk.Img = k.Img;
+      vk.Views = k.Views;
+      vk.Id = k.Id;
+      return vk;
+    }, new { vaultId }).ToList();
+    return vaultKeeps;
   }
 
   public List<VaultKeep> Get()
@@ -50,15 +56,15 @@ public class VaultKeepsRepository : BaseRepository, IRepository<VaultKeep, int>
     throw new NotImplementedException();
   }
 
-  public VaultKeep GetById(int id)
+  public VaultKeep GetById(int vaultKeepId)
   {
     string sql = @"
     SELECT
     vk.*
     FROM vaultkeeps vk
-    WHERE id = @id
+    WHERE vk.vaultKeepId = @vaultKeepId
     ;";
-    VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { id }).FirstOrDefault();
+    VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
     return vaultKeep;
   }
 

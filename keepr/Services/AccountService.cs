@@ -14,6 +14,11 @@ public class AccountService
     return _repo.GetByEmail(email);
   }
 
+  internal Account GetById(string id)
+  {
+    return _repo.GetById(id);
+  }
+
   internal Account GetOrCreateProfile(Account userInfo)
   {
     Account profile = _repo.GetById(userInfo.Id);
