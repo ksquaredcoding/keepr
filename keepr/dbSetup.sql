@@ -49,3 +49,9 @@ CREATE TABLE
         isPrivate TINYINT NOT NULL DEFAULT 0,
         FOREIGN KEY (creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';
+
+SELECT v.*, a.*
+FROM vaults v
+    JOIN accounts a ON a.id = @accountId
+WHERE
+    v.creatorId = "6351949e1a8c11f5daeb3eff";
