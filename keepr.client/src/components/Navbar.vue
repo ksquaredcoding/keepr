@@ -1,33 +1,20 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
-      </div>
-    </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
+  <div class="row justify-content-between align-items-center border-bottom">
+    <div class="col-2 d-flex justify-content-evenly">
+      <router-link class="d-flex" :to="{ name: 'Home' }">
+        <div class="d-flex flex-column align-items-center">
+          <button class="btn home-button">Home</button>
+        </div>
+      </router-link>
+      <h5>Create v</h5>
+    </div>
+    <div class="col-2">
+      <img class="logo-img" src="src\assets\img\keeprlogo.png" alt="keepr co" title="keepr co">
+    </div>
+    <div class="col-1 me-5">
       <Login />
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -61,4 +48,18 @@ a:hover {
   }
 }
 
+.home-button {
+  border-radius: 15px;
+  background-color: #E9D8D6;
+  color: #2D2D2D;
+  font-weight: bold;
+  letter-spacing: 0.03rem;
+}
+
+.logo-img {
+  height: auto;
+  width: 8vw;
+  object-fit: cover;
+  padding: 1rem;
+}
 </style>

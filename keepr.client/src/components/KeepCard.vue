@@ -1,0 +1,65 @@
+<template>
+  <div class="col-md-3 mb-3 keep-card">
+    <div class="card keep-text">
+      <img class="card-img" :src="keep?.img" :alt="keep?.name">
+      <div class="card-img-overlay d-flex flex-column justify-content-end">
+        <div class="d-flex flex-row justify-content-between neg-marg">
+          <div>
+            <p class="fs-5 neg-marg"><strong>{{ keep?.name }}</strong></p>
+          </div>
+          <img class="creator-pic" :src="keep?.creator?.picture" :alt="keep?.creator?.name"
+            :title="keep?.creator?.name">
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script>
+import { computed } from "@vue/reactivity";
+import { Keep } from "../models/Keep.js";
+
+export default {
+  props: {
+    keep: { type: Keep, required: true }
+  },
+  setup(props) {
+    return {
+      coverImg: computed(() => `url(${props.keep?.img})`)
+    }
+  }
+}
+</script>
+
+
+<style lang="scss" scoped>
+.keep-card {
+  width: 15rem;
+  // margin: 0.5rem;
+  // position: absolute;
+}
+
+.keep-text {
+  color: #eaeaea;
+  text-shadow: 0px 0px 4px rgba(44, 44, 44, 0.616);
+  letter-spacing: 0.05em;
+}
+
+.btm-row {
+  position: absolute;
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+}
+
+.creator-pic {
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.neg-marg {
+  margin-bottom: -0.8rem;
+}
+</style>
