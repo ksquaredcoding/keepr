@@ -2,7 +2,8 @@
   <div class="container-fluid">
 
   </div>
-  <div class="row ms-5 mt-5" data-masonry="{'percentPosition': true}">
+  <div class="row ms-1 me-2 mt-1 row-cols-md-3 row-cols-1 g-4"
+    data-masonry="{'percentPosition': true, 'itemSelector': '.col' }">
     <KeepCard v-for="k in keeps" :keep="k" :key="k.id" />
   </div>
 </template>

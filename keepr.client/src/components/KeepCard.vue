@@ -1,8 +1,9 @@
 <template>
-  <div class="col-md-3 mb-3 keep-card">
+  <div class="col keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
+    @click="setActiveKeep(keep?.id)">
     <div class="card keep-text">
       <img class="card-img" :src="keep?.img" :alt="keep?.name">
-      <div class="card-img-overlay d-flex flex-column justify-content-end">
+      <div class="card-img-overlay d-flex flex-column justify-content-end card-body">
         <div class="d-flex flex-row justify-content-between neg-marg">
           <div>
             <p class="fs-5 neg-marg"><strong>{{ keep?.name }}</strong></p>
@@ -19,6 +20,7 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { Keep } from "../models/Keep.js";
+import { keepsService } from "../services/KeepsService.js"
 
 export default {
   props: {
@@ -26,7 +28,10 @@ export default {
   },
   setup(props) {
     return {
-      coverImg: computed(() => `url(${props.keep?.img})`)
+      coverImg: computed(() => `url(${props.keep?.img})`),
+      async setActiveKeep(keepId) {
+        await keepsService.setActiveKeep(keepId)
+      }
     }
   }
 }
@@ -38,6 +43,8 @@ export default {
   width: 15rem;
   // margin: 0.5rem;
   // position: absolute;
+  // top: auto;
+  // left: auto;
 }
 
 .keep-text {
@@ -60,6 +67,6 @@ export default {
 }
 
 .neg-marg {
-  margin-bottom: -0.8rem;
+  margin-bottom: -0.6rem;
 }
 </style>
