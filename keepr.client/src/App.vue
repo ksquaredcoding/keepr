@@ -6,11 +6,13 @@
     <router-view />
   </main>
   <KeepModal />
+  <KeepForm />
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import KeepForm from "./components/KeepForm.vue"
 import KeepModal from "./components/KeepModal.vue"
 import Navbar from './components/Navbar.vue'
 
@@ -20,7 +22,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepModal }
+  components: { Navbar, KeepModal, KeepForm }
 }
 </script>
 <style lang="scss">

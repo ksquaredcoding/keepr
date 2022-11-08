@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-body">
-          <div class="row">
+          <div class="row animate_animated animate_fadeIn">
             <div class="col-md-6">
               <img class="img-fluid" :src="keep?.img" :alt="keep?.name">
             </div>

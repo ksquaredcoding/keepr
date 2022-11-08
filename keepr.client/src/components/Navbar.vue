@@ -6,7 +6,16 @@
           <button class="btn home-button">Home</button>
         </div>
       </router-link>
-      <h5>Create v</h5>
+      <div class="dropdown">
+        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Create
+        </a>
+
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm">Keep</a></li>
+          <li><a class="dropdown-item" href="#">Vault</a></li>
+        </ul>
+      </div>
     </div>
     <div class="col-2">
       <img class="logo-img" src="src\assets\img\keeprlogo.png" alt="keepr co" title="keepr co">
