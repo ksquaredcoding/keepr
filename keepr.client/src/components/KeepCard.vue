@@ -1,5 +1,5 @@
 <template>
-  <div class="col keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
+  <div class="col-md-3 keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
     @click="setActiveKeep(keep?.id)">
     <div class="card keep-text">
       <img class="card-img" :src="keep?.img" :alt="keep?.name">
@@ -40,11 +40,12 @@ export default {
 
 <style lang="scss" scoped>
 .keep-card {
-  width: 15rem;
+  // width: 15rem;
   // margin: 0.5rem;
   // position: absolute;
   // top: auto;
   // left: auto;
+  max-height: fit-content;
 }
 
 .keep-text {
