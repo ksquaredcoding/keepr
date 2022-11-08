@@ -1,20 +1,23 @@
 <template>
-  <header class="no-x-over body-bg-color">
-    <Navbar />
+  <header class="no-x-over body-bg-color" style="z-index: 10">
+    <Navbar2 />
   </header>
-  <main class="no-x-over body-bg-color">
+  <main class="no-x-over body-bg-color" style="z-index: 9">
     <router-view />
   </main>
   <KeepModal />
   <KeepForm />
+  <VaultForm />
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import KeepForm from "./components/KeepForm.vue"
+import VaultForm from "./components/VaultForm.vue"
 import KeepModal from "./components/KeepModal.vue"
 import Navbar from './components/Navbar.vue'
+import Navbar2 from "./components/Navbar2.vue"
 
 export default {
   setup() {
@@ -22,7 +25,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepModal, KeepForm }
+  components: { Navbar, KeepModal, KeepForm, Navbar2 }
 }
 </script>
 <style lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-between align-items-center border-bottom">
+  <div class="row justify-content-between align-items-center border-bottom attempt">
     <div class="col-2 d-flex justify-content-evenly">
       <router-link class="d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center">
@@ -12,8 +12,9 @@
         </a>
 
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm">Keep</a></li>
-          <li><a class="dropdown-item" href="#">Vault</a></li>
+          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm"
+              style="z-index: 10">Keep</a></li>
+          <li><a class="dropdown-item" href="#" style="z-index: 10">Vault</a></li>
         </ul>
       </div>
     </div>
@@ -37,26 +38,6 @@ export default {
 </script>
 
 <style scoped>
-a:hover {
-  text-decoration: none;
-}
-
-.nav-link {
-  text-transform: uppercase;
-}
-
-.navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-@media screen and (min-width: 768px) {
-  nav {
-    height: 64px;
-  }
-}
-
 .home-button {
   border-radius: 15px;
   background-color: #E9D8D6;
@@ -70,5 +51,10 @@ a:hover {
   width: 8vw;
   object-fit: cover;
   padding: 1rem;
+}
+
+.attempt {
+  overflow: visible;
+  z-index: 999;
 }
 </style>
