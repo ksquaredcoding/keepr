@@ -23,8 +23,8 @@
               <div class="d-flex justify-content-between">
                 <div class="d-flex">
                   <form @submit.prevent="handleSubmit">
-                    <select class="btn border-0 fw-bold me-2" name="vault" aria-label="Select a vault to save keep to"
-                      v-model="editable.vault">
+                    <select class="btn border-0 fw-bold me-2" name="vaultId" aria-label="Select a vault to save keep to"
+                      v-model="editable.vaultId">
                       <option selected>Add to Vault</option>
                       <option :value="v.id" v-for="v in vaults" :key="v.id">{{ v.name }}</option>
                     </select>
@@ -45,7 +45,6 @@
   </div>
 </template>
 
-<!-- TODO fix adding keep to vault, got back undefined -->
 <script>
 import { computed } from "@vue/reactivity";
 import { Keep } from "../models/Keep.js";
