@@ -10,6 +10,19 @@
         </div>
       </div>
     </div>
+    <div class="d-flex" v-if="account?.id == vault?.creatorId">
+      <div class="dropdown dropend">
+        <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          ...
+        </button>
+        <ul class="dropdown-menu dropdown-menu-lg-right">
+          <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editVaultForm">Edit</a>
+          </li>
+          <li><a class="dropdown-item text-danger" href="#" @click="removeVault()">Delete</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="d-flex justify-content-center">
       <div>
         <p class="keepnum my-2"><b>{{ keeps.length }} Keeps</b></p>
@@ -53,9 +66,23 @@ export default {
     })
     return {
       route,
+      account: computed(() => AppState.account),
       vault: computed(() => AppState.activeVault),
       keeps: computed(() => AppState.vaultkeeps),
       coverImg: computed(() => `url(${AppState.activeVault?.img})`),
+      async removeVault() {
+        try {
+          const yes = await Pop.confirm("Are you sure you want to delete this vault?")
+          if (!yes) {
+            return
+          }
+          await vaultsService.removeVault(route.params.id)
+          Pop.success("You have deleted this vault")
+        } catch (error) {
+          console.error('[DELETING VAULT]', error)
+          Pop.error(error.message)
+        }
+      }
     };
   },
   components: { KeepCard }

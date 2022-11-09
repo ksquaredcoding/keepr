@@ -5,7 +5,7 @@
     <router-link :to="{ name: 'Vault', params: { id: vault?.id } }">
       <div class="d-flex justify-content-between">
         <h4 class="vault-text text-uppercase">{{ vault?.name }}</h4>
-        <i class="bi bi-lock-fill lock-bg" v-if="vault?.isPrivate && route.name != 'Account'"></i>
+        <i class="bi bi-lock-fill lock-bg text-dark" v-if="vault?.isPrivate && route.name == 'Account'"></i>
       </div>
     </router-link>
   </div>
@@ -59,5 +59,7 @@ export default {
 .lock-bg {
   background-color: #eaeaea;
   border-radius: 50%;
+  height: fit-content;
+  width: fit-content;
 }
 </style>

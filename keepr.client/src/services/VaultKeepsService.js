@@ -19,6 +19,18 @@ class VaultKeepsService {
     vkData.keepId = AppState.activeKeep.id
     await api.post("/api/vaultkeeps", vkData)
   }
+
+  async removeVaultKeep(keepId, vaultId) {
+    const vk = AppState.vaultkeeps.find(k => k.keepId == keepId && k.vaultId == vaultId)
+    if (!vk) {
+      console.error("Could not find vaultkeep")
+    }
+    if (AppState.account.id != AppState.activeVault.creatorId) {
+      Pop.error("You can only delete keeps from your own vault")
+    }
+    await api.delete(`/api/vaultkeeps/${vk.vaultKeepId}`)
+    AppState.vaultkeeps = AppState.vaultkeeps.filter(k => k.id != vk.id)
+  }
 }
 
 export const vaultKeepsService = new VaultKeepsService()
