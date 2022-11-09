@@ -25,7 +25,7 @@ class VaultsService {
     AppState.activeVault = vault
     await vaultKeepsService.getVaultKeeps(vaultId)
   }
-
+  // TODO fix get active vault
   async getActiveVault(vaultId) {
     const res = await api.get(`/api/vaults/${vaultId}`)
     const vault = new Vault(res.data)
