@@ -14,7 +14,9 @@
     <div class="row justify-content-center">
       <div class="col-10">
         <h1>Vaults</h1>
-        <div class="row"></div>
+        <div class="row justify-content-center">
+          <VaultCard v-for="v in vaults" :vault="v" :key="v.id" />
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -29,10 +31,10 @@
 </template>
 
 <script>
-import { onAuthLoaded } from "@bcwdev/auth0provider-client"
 import { computed, onMounted, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import KeepCard from "../components/KeepCard.vue"
+import VaultCard from "../components/VaultCard.vue"
 import { accountService } from "../services/AccountService.js"
 import { keepsService } from "../services/KeepsService.js"
 import Pop from "../utils/Pop.js"
@@ -58,11 +60,9 @@ export default {
         Pop.error(error.message);
       }
     }
-    onMounted(() => {
-      getMyVaults();
-    });
     watchEffect(() => {
       if (AppState.account.id) {
+        getMyVaults();
         getMyKeeps();
       }
     });
@@ -72,7 +72,7 @@ export default {
       keeps: computed(() => AppState.profileKeeps)
     };
   },
-  components: { KeepCard }
+  components: { KeepCard, VaultCard }
 }
 </script>
 

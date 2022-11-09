@@ -21,7 +21,12 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
-  }
+  },
+  {
+    path: '/vault/:id',
+    name: 'Vault',
+    component: loadPage('VaultPage')
+  },
 ]
 
 export const router = createRouter({

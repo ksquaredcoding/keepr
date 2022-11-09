@@ -5,13 +5,14 @@
         <div class="d-flex flex-nowrap align-items-center ms-2">
           <li class="nav-item">
             <router-link class="d-flex" :to="{ name: 'Home' }">
-              <button class="btn home-button" type="button">Home</button>
+              <button class="btn home-button fw-bold fs-5" type="button">Home</button>
             </router-link>
           </li>
           <li class="nav-item dropdown dropend">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>Create</b>
-            </a>
+            <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Create
+            </button>
             <ul class="dropdown-menu dropdown-menu-lg-right">
               <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm">Keep</a>
               </li>
@@ -52,9 +53,8 @@ export default {
 }
 
 .logo-img {
-  height: auto;
-  width: 6vw;
-  object-fit: cover;
+  height: 10vh;
+  width: auto;
   padding: 1rem;
 }
 

@@ -8,8 +8,8 @@
           <div>
             <p class="fs-5 neg-marg"><strong>{{ keep?.name }}</strong></p>
           </div>
-          <img class="creator-pic" :src="keep?.creator?.picture" :alt="keep?.creator?.name"
-            :title="keep?.creator?.name">
+          <img class="creator-pic" :src="keep?.creator?.picture" :alt="keep?.creator?.name" :title="keep?.creator?.name"
+            v-if="route.name == 'Home'">
         </div>
       </div>
     </div>
@@ -19,6 +19,7 @@
 
 <script>
 import { computed } from "@vue/reactivity";
+import { useRoute } from "vue-router";
 import { Keep } from "../models/Keep.js";
 import { keepsService } from "../services/KeepsService.js"
 
@@ -27,7 +28,9 @@ export default {
     keep: { type: Keep, required: true }
   },
   setup(props) {
+    const route = useRoute();
     return {
+      route,
       coverImg: computed(() => `url(${props.keep?.img})`),
       async setActiveKeep(keepId) {
         await keepsService.setActiveKeep(keepId)
@@ -40,11 +43,6 @@ export default {
 
 <style lang="scss" scoped>
 .keep-card {
-  // width: 15rem;
-  // margin: 0.5rem;
-  // position: absolute;
-  // top: auto;
-  // left: auto;
   max-height: fit-content;
 }
 
@@ -68,6 +66,6 @@ export default {
 }
 
 .neg-marg {
-  margin-bottom: -0.6rem;
+  margin-bottom: -0.4rem;
 }
 </style>
