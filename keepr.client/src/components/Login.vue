@@ -1,5 +1,5 @@
 <template>
-  <span class="navbar-text">
+  <span class="navbar-text me-2">
     <button class="btn btn-dark my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
       Login
     </button>

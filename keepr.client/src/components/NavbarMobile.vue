@@ -17,7 +17,7 @@
         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#vaultForm">Vault</a></li>
       </ul>
     </div>
-    <Login class="me-2" />
+    <Login />
   </div>
 </template>
 

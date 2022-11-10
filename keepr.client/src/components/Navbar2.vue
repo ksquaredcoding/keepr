@@ -2,13 +2,13 @@
   <nav class="navbar navbar-expand-lg bg-light ">
     <div class="container-fluid row mx-2 ">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 col-12 d-flex justify-content-between">
-        <div class="d-flex flex-nowrap align-items-center ms-2">
-          <li class="nav-item">
+        <li class="d-flex flex-nowrap align-items-center ms-2">
+          <div class="nav-item">
             <router-link class="d-flex" :to="{ name: 'Home' }">
               <button class="btn home-button fw-bold fs-5" type="button" title="Return Home">Home</button>
             </router-link>
-          </li>
-          <li class="nav-item dropdown dropend" v-if="account.id">
+          </div>
+          <div class="nav-item dropdown dropend" v-if="account.id">
             <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
               aria-expanded="false" title="Create a keep or vault">
               Create
@@ -20,12 +20,14 @@
               <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#vaultForm"
                   title="Create a vault">Vault</a></li>
             </ul>
-          </li>
-        </div>
-        <a class="navbar-brand" href="#"><img class="logo-img" src="src\assets\img\keeprlogo.png" alt="keepr co"
-            title="keepr co"></a>
+          </div>
+        </li>
+        <li>
+          <a class="navbar-brand" href="#"><img class="logo-img" src="src\assets\img\keeprlogo.png" alt="keepr co"
+              title="keepr co"></a>
+        </li>
         <li class="nav-item d-flex flex-nowrap align-items-center">
-          <Login class="me-2" />
+          <Login />
         </li>
       </ul>
     </div>
