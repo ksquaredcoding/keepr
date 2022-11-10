@@ -10,8 +10,9 @@ class VaultKeepsService {
   }
 
   async addVaultKeep(vkData) {
-    await this.getVaultKeeps(vkData.vaultId)
-    const keep = AppState.vaultkeeps.find(k => k.id == AppState.activeKeep.id)
+    debugger
+    // await this.getVaultKeeps(vkData.vaultId)
+    const keep = AppState.vaultkeeps.find(k => k.id == AppState.activeKeep.id && k.vaultId == vkData.vaultId)
     if (keep) {
       Pop.toast("You've already added that keep to this vault!", "warning")
       return

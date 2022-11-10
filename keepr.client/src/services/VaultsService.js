@@ -16,12 +16,11 @@ class VaultsService {
   async getActiveVault(vaultId) {
     const vault = await this.getVaultById(vaultId)
     if (vault.isPrivate == true && vault.creatorId != AppState.account.id) {
-      router.push({ to: "Home" })
+
       Pop.toast("That vault is private, sorry!", "warning")
       return
     }
     if (!vault) {
-      router.push({ to: "Home" })
       Pop.toast("Unable to find vault, sorry!", "warning")
       return
     }
@@ -44,7 +43,7 @@ class VaultsService {
       Pop.error("You can only delete your own vaults")
     }
     await api.delete(`/api/vaults/${vaultId}`)
-    router.push({ to: "Home" })
+    router.push({ name: "Home" })
   }
 
   async editVault(vaultData) {

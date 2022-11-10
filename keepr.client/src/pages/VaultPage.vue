@@ -46,6 +46,7 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { AppState } from "../AppState.js";
 import KeepCard from "../components/KeepCard.vue";
+import { router } from "../router.js";
 import { vaultsService } from "../services/VaultsService.js";
 import Pop from "../utils/Pop.js";
 
@@ -57,7 +58,7 @@ export default {
         await vaultsService.getActiveVault(route.params.id)
       } catch (error) {
         console.error('[GETTING ACTIVE VAULT]', error)
-        Pop.error(error.message)
+        router.push({ name: "Home" })
       }
     }
 
