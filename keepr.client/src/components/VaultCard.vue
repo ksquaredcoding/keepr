@@ -3,9 +3,9 @@
     class="col-md-3 rounded m-2 vault-card d-flex flex-column justify-content-end selectable animate_animated animate_fadeIn"
     @click="getActiveVault(vault?.id)" :title="vault?.name">
     <router-link :to="{ name: 'Vault', params: { id: vault?.id } }">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-end">
         <h4 class="vault-text text-uppercase">{{ vault?.name }}</h4>
-        <i class="bi bi-lock-fill lock-bg text-dark" v-if="vault?.isPrivate && route.name == 'Account'"></i>
+        <i class="bi bi-lock-fill lock-bg mb-1 text-dark" v-if="vault?.isPrivate && route.name == 'Account'"></i>
       </div>
     </router-link>
   </div>
