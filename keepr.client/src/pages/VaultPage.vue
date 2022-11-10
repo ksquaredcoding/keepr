@@ -10,16 +10,17 @@
         </div>
       </div>
     </div>
-    <div class="d-flex" v-if="account?.id == vault?.creatorId">
+    <div class="d-flex justify-content-around" v-if="account?.id == vault?.creatorId">
+      <div></div>
       <div class="dropdown dropend">
         <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           ...
         </button>
         <ul class="dropdown-menu dropdown-menu-lg-right">
-          <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editVaultForm">Edit</a>
+          <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editVaultForm">Edit Vault</a>
           </li>
-          <li><a class="dropdown-item text-danger" href="#" @click="removeVault()">Delete</a></li>
+          <li><a class="dropdown-item text-danger" href="#" @click="removeVault()">Delete Vault</a></li>
         </ul>
       </div>
     </div>
@@ -52,9 +53,7 @@ export default {
     const route = useRoute()
     async function getActiveVault() {
       try {
-        if (!AppState.activeVault || AppState.activeVault.id != route.params.id) {
-          await vaultsService.getActiveVault(route.params.id)
-        }
+        await vaultsService.getActiveVault(route.params.id)
       } catch (error) {
         console.error('[GETTING ACTIVE VAULT]', error)
         Pop.error(error.message)

@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" id="keepForm" tabindex="-1" aria-labelledby="keepFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-body">
           <form @submit.prevent="handleSubmit">
@@ -28,8 +28,7 @@
                 </div>
               </div>
               <div class="my-3">
-                <button class="btn btn-primary" type="submit" data-bs-target="#keepModal" data-bs-toggle="modal"
-                  title="Create Keep">Create Keep
+                <button class="btn btn-primary" type="submit" title="Create Keep">Create Keep
                 </button>
               </div>
             </div>
@@ -42,6 +41,7 @@
 
 
 <script>
+import { Modal } from "bootstrap";
 import { ref } from "vue";
 import { keepsService } from "../services/KeepsService.js";
 import Pop from "../utils/Pop.js";
@@ -55,6 +55,9 @@ export default {
         try {
           await keepsService.createKeep(editable.value)
           editable.value = {}
+          Modal.getInstance("#keepForm").hide()
+          Modal.getOrCreateInstance("#keepModal")
+          Pop.success("You have successfully created a keep")
         } catch (error) {
           console.error('[CREATING KEEP]', error)
           Pop.error(error.message)

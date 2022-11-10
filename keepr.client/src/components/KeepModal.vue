@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-body" v-if="keep">
           <div class="row animate_animated animate_fadeIn">
@@ -29,10 +29,13 @@
                 </div>
                 <div class="d-flex" v-else>
                   <form @submit.prevent="handleSubmit">
+                    <p><b>Add To Vault</b></p>
                     <select class="btn border-0 fw-bold me-2" name="vaultId" aria-label="Select a vault to save keep to"
                       v-model="editable.vaultId">
-                      <option selected>Add to Vault</option>
-                      <option :value="v.id" v-for="v in vaults" :key="v.id">{{ v.name }}</option>
+                      <option :value="v.id" v-for="v in vaults" :key="v.id"
+                        :class="vaultKeeps.find(k => k.vaultId == v.id && k.keepId == keep?.id) ? 'text-danger' : ''">{{
+                            v.name
+                        }}</option>
                     </select>
                     <button class="btn btn-dark ms-2" style="height: fit-content;">save</button>
                   </form>
@@ -79,11 +82,23 @@ export default {
         Pop.error(error.message);
       }
     }
+    async function getMyVaultKeeps() {
+      try {
+        const vaultKeeps = await accountService.getMyVaultKeeps();
+        return vaultKeeps;
+      }
+      catch (error) {
+        console.error("[GETTING ACCOUNT VAULT KEEPS]", error);
+        Pop.error(error.message);
+      }
+    }
     watchEffect(() => {
       if (AppState.account.id) {
         getMyVaults();
+        getMyVaultKeeps()
       }
     });
+
     return {
       activeVault: computed(() => AppState.activeVault),
       route,
@@ -91,9 +106,12 @@ export default {
       account: computed(() => AppState.account),
       editable,
       vaults: computed(() => AppState.vaults),
+      vaultIds: computed(() => AppState.vaultIds),
+      vaultKeeps: computed(() => AppState.myVaultKeeps),
       async handleSubmit() {
         try {
           await vaultKeepsService.addVaultKeep(editable.value)
+          this.keep.kept++
           Pop.success("You've added this keep to your vault!")
         } catch (error) {
           console.error('[SAVING KEEP TO VAULT]', error)
@@ -139,5 +157,9 @@ export default {
   border-radius: 50%;
   height: 2.5rem;
   width: 2.5rem;
+}
+
+.striked {
+  text-decoration: line-through;
 }
 </style>

@@ -38,7 +38,8 @@ public class AccountsRepository
             UPDATE accounts
             SET 
               name = @Name,
-              picture = @Picture
+              picture = @Picture,
+              coverImg = @CoverImg
             WHERE id = @Id;";
     _db.Execute(sql, update);
     return update;
@@ -53,6 +54,22 @@ public class AccountsRepository
     WHERE v.creatorId = @accountId
     ;";
     return _db.Query<Vault>(sql, new { accountId }).ToList();
+  }
+
+  internal List<VaultKeep> GetAccountVaultKeeps(string id)
+  {
+    string sql = @"
+        SELECT
+        v.id,
+        vk.*
+        FROM vaults v
+        JOIN vaultkeeps vk ON vk.vaultId = v.id
+        WHERE v.creatorId = @id
+        ;";
+    return _db.Query<Vault, VaultKeep, VaultKeep>(sql, (v, vk) =>
+    {
+      return vk;
+    }, new { id }).ToList();
   }
 }
 

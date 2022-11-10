@@ -42,4 +42,22 @@ public class AccountController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  [HttpPut]
+  [Authorize]
+  public async Task<ActionResult<Account>> EditAccount([FromBody] Account data)
+  {
+    Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+    var edited = _accountService.Edit(data, userInfo.Email);
+    return Ok(edited);
+  }
+
+  [HttpGet("vaultkeeps")]
+  [Authorize]
+  public async Task<ActionResult<List<VaultKeep>>> GetAccountVaultKeeps()
+  {
+    Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+    List<VaultKeep> vaultKeeps = _accountService.GetAccountVaultKeeps(userInfo.Id);
+    return Ok(vaultKeeps);
+  }
 }

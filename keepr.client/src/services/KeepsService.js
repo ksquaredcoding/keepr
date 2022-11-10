@@ -18,7 +18,7 @@ class KeepsService {
   async createKeep(keepData) {
     const res = await api.post("/api/keeps", keepData)
     const keep = new Keep(res.data)
-    AppState.keeps = [...AppState.keeps, keep]
+    AppState.keeps = [keep, ...AppState.keeps]
     AppState.activeKeep = null
     AppState.activeKeep = keep
   }

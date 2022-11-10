@@ -9,6 +9,7 @@
   <KeepForm />
   <VaultForm />
   <EditVaultForm />
+  <EditAccountForm />
 </template>
 
 <script>
@@ -20,6 +21,7 @@ import KeepModal from "./components/KeepModal.vue"
 import Navbar from './components/Navbar.vue'
 import Navbar2 from "./components/Navbar2.vue"
 import EditVaultForm from "./components/EditVaultForm.vue"
+import EditAccountForm from "./components/EditAccountForm.vue"
 
 export default {
   setup() {
@@ -27,7 +29,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepModal, KeepForm, Navbar2, EditVaultForm }
+  components: { Navbar, KeepModal, KeepForm, Navbar2, EditVaultForm, EditAccountForm }
 }
 </script>
 <style lang="scss">

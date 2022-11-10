@@ -7,6 +7,20 @@
         alt="profile cover image" v-else>
       <img class="profileImg" :src="account?.picture" :alt="account?.name">
     </div>
+    <div class="d-flex justify-content-around">
+      <div></div>
+      <div class="dropdown dropend">
+        <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          ...
+        </button>
+        <ul class="dropdown-menu dropdown-menu-lg-right">
+          <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editAccountForm">Edit
+              Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="row jusitfy-content-center text-center mt-5 pt-4">
       <h2>{{ account?.name }}</h2>
       <p>{{ vaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>

@@ -55,3 +55,7 @@ FROM vaults v
     JOIN accounts a ON a.id = @accountId
 WHERE
     v.creatorId = "6351949e1a8c11f5daeb3eff";
+
+ALTER TABLE accounts
+ADD
+    COLUMN coverImg varchar(255) COMMENT 'User Cover Image';

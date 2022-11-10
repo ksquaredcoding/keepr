@@ -13,23 +13,9 @@ class VaultsService {
     AppState.vaults.push(vault)
   }
 
-  async setActiveVault(vaultId) {
-    const vault = AppState.vaults.find(v => v.id == vaultId)
-    if (!vault) {
-      await this.getActiveVault(vaultId)
-    }
-    if (vault.isPrivate && vault.creatorId != AppState.account.id) {
-      router.push({ to: "Home" })
-      Pop.toast("That vault is private, sorry!", "warning")
-    }
-    AppState.activeVault = vault
-    await vaultKeepsService.getVaultKeeps(vaultId)
-  }
-  // TODO fix get active vault
   async getActiveVault(vaultId) {
-    const res = await api.get(`/api/vaults/${vaultId}`)
-    const vault = new Vault(res.data)
-    if (vault.isPrivate && vault.creatorId != AppState.account.id) {
+    const vault = await this.getVaultById(vaultId)
+    if (vault.isPrivate == true && vault.creatorId != AppState.account.id) {
       router.push({ to: "Home" })
       Pop.toast("That vault is private, sorry!", "warning")
       return

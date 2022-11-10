@@ -82,7 +82,7 @@ export default {
   border-radius: 5%;
   border: dashed 4px #ababab;
   height: 15rem;
-  width: 15rem;
+  width: 30rem;
   object-fit: cover;
 }
 </style>

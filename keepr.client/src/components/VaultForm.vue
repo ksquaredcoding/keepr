@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" id="vaultForm" tabindex="-1" aria-labelledby="vaultFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-body">
           <form @submit.prevent="handleSubmit">
@@ -34,8 +34,7 @@
                 </div>
               </div>
               <div class="my-3">
-                <button class="btn btn-primary" type="submit" data-bs-target="#vaultModal" data-bs-toggle="modal"
-                  title="Create vault">Create Vault
+                <button class="btn btn-primary" type="submit" title="Create vault">Create Vault
                 </button>
               </div>
             </div>
@@ -48,6 +47,7 @@
 
 
 <script>
+import { Modal } from "bootstrap";
 import { ref } from "vue";
 import { vaultsService } from "../services/VaultsService.js";
 import Pop from "../utils/Pop.js";
@@ -61,6 +61,8 @@ export default {
         try {
           await vaultsService.createVault(editable.value)
           editable.value = {}
+          Modal.getInstance("#vaultForm").hide()
+          Pop.success("You have successfully created a vault")
         } catch (error) {
           console.error('[CREATING VAULT]', error)
           Pop.error(error.message)
@@ -77,7 +79,7 @@ export default {
   border-radius: 5%;
   border: dashed 4px #ababab;
   height: 15rem;
-  width: 15rem;
+  width: 30rem;
   object-fit: cover;
 }
 </style>

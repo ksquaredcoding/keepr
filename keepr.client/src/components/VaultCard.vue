@@ -1,7 +1,7 @@
 <template>
   <div
     class="col-md-3 rounded m-2 vault-card d-flex flex-column justify-content-end selectable animate_animated animate_fadeIn"
-    @click="setActiveVault(vault?.id)">
+    @click="getActiveVault(vault?.id)">
     <router-link :to="{ name: 'Vault', params: { id: vault?.id } }">
       <div class="d-flex justify-content-between">
         <h4 class="vault-text text-uppercase">{{ vault?.name }}</h4>
@@ -31,11 +31,11 @@ export default {
     return {
       route,
       coverImg: computed(() => `url(${props.vault?.img})`),
-      async setActiveVault(vaultId) {
+      async getActiveVault(vaultId) {
         try {
-          await vaultsService.setActiveVault(vaultId)
+          await vaultsService.getActiveVault(vaultId)
         } catch (error) {
-          console.error('[SETTING ACTIVE VAULT]', error)
+          console.error('[GETTING ACTIVE VAULT]', error)
           Pop.error(error.message)
         }
       }
