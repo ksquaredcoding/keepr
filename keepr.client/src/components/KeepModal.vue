@@ -4,10 +4,10 @@
       <div class="modal-content">
         <div class="modal-body" v-if="keep">
           <div class="row animate_animated animate_fadeIn">
-            <div class="col-md-4">
+            <div class="col-lg-4">
               <img class="img-fluid rounded" :src="keep?.img" :alt="keep?.name">
             </div>
-            <div class="col-md-8 d-flex flex-column justify-content-between">
+            <div class="col-lg-8 d-flex flex-column justify-content-between">
               <div class="d-flex justify-content-center">
                 <p class="mx-2 fs-5"><i class="mdi mdi-eye-outline"></i> {{ keep?.views }}</p>
                 <p class="mx-2 fs-5"><i class="mdi mdi-alpha-k-box-outline"></i> {{ keep?.kept }}</p>
@@ -22,12 +22,14 @@
               </div>
               <div class="d-flex justify-content-between">
                 <div v-if="activeVault?.creatorId == account?.id && route.name == 'Vault'">
-                  <button class="btn" @click="removeVaultKeep(keep?.id)">Remove</button>
+                  <button class="btn" @click="removeVaultKeep(keep?.id)"><i class="mdi mdi-delete-circle"></i>
+                    Remove</button>
                 </div>
                 <div v-else-if="keep?.creatorId == account?.id && route.name == 'Account'">
-                  <button class="btn" @click="removeMyKeep(keep?.id)">Remove</button>
+                  <button class="btn" @click="removeMyKeep(keep?.id)"><i class="mdi mdi-delete-circle"></i>
+                    Remove</button>
                 </div>
-                <div class="d-flex" v-else>
+                <div class="d-flex" v-else-if="account.id">
                   <form @submit.prevent="handleSubmit">
                     <p><b>Add To Vault</b></p>
                     <select class="btn border-0 fw-bold me-2" name="vaultId" aria-label="Select a vault to save keep to"

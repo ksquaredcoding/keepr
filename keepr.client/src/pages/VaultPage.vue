@@ -14,13 +14,14 @@
       <div></div>
       <div class="dropdown dropend">
         <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
+          aria-expanded="false" title="Vault Options">
           ...
         </button>
         <ul class="dropdown-menu dropdown-menu-lg-right">
-          <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editVaultForm">Edit Vault</a>
+          <li><a class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#editVaultForm" title="Edit Vault">Edit
+              Vault</a>
           </li>
-          <li><a class="dropdown-item text-danger" href="#" @click="removeVault()">Delete Vault</a></li>
+          <li><a class="dropdown-item text-danger" @click="removeVault()" title="Delete Vault">Delete Vault</a></li>
         </ul>
       </div>
     </div>
@@ -77,6 +78,7 @@ export default {
           }
           await vaultsService.removeVault(route.params.id)
           Pop.success("You have deleted this vault")
+          return
         } catch (error) {
           console.error('[DELETING VAULT]', error)
           Pop.error(error.message)

@@ -44,7 +44,7 @@ class VaultsService {
       Pop.error("You can only delete your own vaults")
     }
     await api.delete(`/api/vaults/${vaultId}`)
-    router.push({ to: "Account" })
+    router.push({ to: "Home" })
   }
 
   async editVault(vaultData) {

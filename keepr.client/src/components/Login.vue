@@ -1,14 +1,14 @@
 <template>
   <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
-      v-if="!user.isAuthenticated">
+    <button class="btn btn-dark my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
       Login
     </button>
     <div v-else>
       <div class="dropdown dropstart my-2 my-lg-0">
         <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="60" class="rounded-circle" />
+            <img :src="account.picture || user.picture" alt="account photo" height="60" class="rounded-circle"
+              :title="account.name" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-left p-0" aria-labelledby="authDropdown">

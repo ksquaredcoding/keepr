@@ -1,7 +1,7 @@
 <template>
   <div
     class="col-md-3 rounded m-2 vault-card d-flex flex-column justify-content-end selectable animate_animated animate_fadeIn"
-    @click="getActiveVault(vault?.id)">
+    @click="getActiveVault(vault?.id)" :title="vault?.name">
     <router-link :to="{ name: 'Vault', params: { id: vault?.id } }">
       <div class="d-flex justify-content-between">
         <h4 class="vault-text text-uppercase">{{ vault?.name }}</h4>

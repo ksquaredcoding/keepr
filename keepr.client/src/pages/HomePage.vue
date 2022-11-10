@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
   </div>
-  <div class="row ms-1 me-2 mt-1 g-4" v-masonry transition-duration="0.3s" item-selector=".item">
+  <div class="row ms-1 me-2 mt-1 g-4 no-y-over" v-masonry transition-duration="0.3s" item-selector=".item">
     <KeepCard v-for="k in keeps" :keep="k" :key="k.id" v-masonry-tile class="item" />
   </div>
 </template>

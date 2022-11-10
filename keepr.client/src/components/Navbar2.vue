@@ -5,18 +5,20 @@
         <div class="d-flex flex-nowrap align-items-center ms-2">
           <li class="nav-item">
             <router-link class="d-flex" :to="{ name: 'Home' }">
-              <button class="btn home-button fw-bold fs-5" type="button">Home</button>
+              <button class="btn home-button fw-bold fs-5" type="button" title="Return Home">Home</button>
             </router-link>
           </li>
-          <li class="nav-item dropdown dropend">
+          <li class="nav-item dropdown dropend" v-if="account.id">
             <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+              aria-expanded="false" title="Create a keep or vault">
               Create
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-right">
-              <li><a class=" dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#keepForm">Keep</a>
+              <li><a class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#keepForm"
+                  title="Create a keep">Keep</a>
               </li>
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#vaultForm">Vault</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#vaultForm"
+                  title="Create a vault">Vault</a></li>
             </ul>
           </li>
         </div>
@@ -32,11 +34,15 @@
 
 
 <script>
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState.js";
 import Login from "./Login.vue";
 
 export default {
   setup() {
-    return {};
+    return {
+      account: computed(() => AppState.account)
+    };
   },
   components: { Login }
 }

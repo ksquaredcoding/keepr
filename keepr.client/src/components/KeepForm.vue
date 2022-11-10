@@ -5,7 +5,7 @@
         <div class="modal-body">
           <form @submit.prevent="handleSubmit">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <div>
                   <img :src="editable.img" alt="keep image preview"
                     class="mt-2 preview-img animate_animated animate_fadeIn">
@@ -16,7 +16,7 @@
                     placeholder="Give your keep a cool image">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="name"> Name:</label>
                   <input type="text" v-model="editable.name" placeholder="Name of keep" required class="form-control">
