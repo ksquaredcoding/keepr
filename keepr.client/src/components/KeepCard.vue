@@ -8,8 +8,8 @@
           <div>
             <p class="fs-5 neg-marg"><strong>{{ keep?.name }}</strong></p>
           </div>
-          <img class="creator-pic" :src="keep?.creator?.picture" :alt="keep?.creator?.name" :title="keep?.creator?.name"
-            v-if="route.name == 'Home'">
+          <img class="creator-pic d-md-block d-none" :src="keep?.creator?.picture" :alt="keep?.creator?.name"
+            :title="keep?.creator?.name" v-if="route.name == 'Home'">
         </div>
       </div>
     </div>
