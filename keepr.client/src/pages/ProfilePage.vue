@@ -1,10 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="d-flex justify-content-center coverArea">
-      <img class="profCover" :src="account?.coverImg" alt="profile cover image" v-if="account?.coverImg">
+      <img class="profCover" :src="account?.coverImg" alt="profile cover image" v-if="account?.coverImg"
+        title="Profile Cover Image">
       <img class="profCover"
         src="https://images.unsplash.com/photo-1549321495-305eb13f8aa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
-        alt="profile cover image" v-else>
+        alt="profile cover image" v-else title="Profile Cover Image">
       <img class="profileImg" :src="account?.picture" :alt="account?.name" :title="account?.name">
     </div>
     <div class="row jusitfy-content-center text-center mt-5 pt-4">

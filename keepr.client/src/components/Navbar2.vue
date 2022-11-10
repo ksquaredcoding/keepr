@@ -23,8 +23,8 @@
           </div>
         </li>
         <li>
-          <a class="navbar-brand" href="#"><img class="logo-img" src="src\assets\img\keeprlogo.png" alt="keepr co"
-              title="keepr co"></a>
+          <a class="navbar-brand" href="#"><img class="logo-img" src="src\assets\img\keeprlogo.png"
+              alt="keepr co/return home" title="keepr co"></a>
         </li>
         <li class="nav-item d-flex flex-nowrap align-items-center">
           <Login />

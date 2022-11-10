@@ -3,18 +3,19 @@
     <div>
       <router-link :to="{ name: 'Home' }">
         <img class="selectable logo-img my-2 ms-2" src="src\assets\img\keeprlogo.png" alt="Return Home"
-          title="Return Home">
+          title="Keepr Co/Return Home">
       </router-link>
     </div>
     <div class="nav-item dropdown dropup" v-if="account.id">
       <button class="btn text-truncate dropdown-toggle fw-bold fs-5" type="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
+        aria-expanded="false" title="Create Keep or Vault">
         Create
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-right">
-        <li><a class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#keepForm">Keep</a>
+        <li><a class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#keepForm" title="Create Keep">Keep</a>
         </li>
-        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#vaultForm">Vault</a></li>
+        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#vaultForm" title="Create Vault">Vault</a>
+        </li>
       </ul>
     </div>
     <Login />
