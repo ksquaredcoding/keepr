@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-3 keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
+  <div class="col-md-3 col-6 keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
     @click="setActiveKeep(keep?.id)" :title="keep?.name">
     <div class="card keep-text">
       <img class="card-img" :src="keep?.img" :alt="keep?.name">
