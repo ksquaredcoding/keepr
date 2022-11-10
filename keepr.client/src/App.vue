@@ -2,8 +2,10 @@
   <header class="no-x-over body-bg-color" style="z-index: 10">
     <Navbar2 class="d-none d-lg-block" />
   </header>
-  <main class="no-x-over body-bg-color footer-margin" style="z-index: 9">
-    <router-view />
+  <main class="no-x-over body-bg-color footer-margin d-flex justify-content-center" style="z-index: 9">
+    <div class="col-md-9 col-12">
+      <router-view />
+    </div>
   </main>
   <KeepModal />
   <KeepForm />

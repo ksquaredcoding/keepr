@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-3 col-6 keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
+  <div class="col-lg-3 col-md-4 col-6 keep-card selectable" data-bs-toggle="modal" data-bs-target="#keepModal"
     @click="setActiveKeep(keep?.id)" :title="keep?.name">
     <div class="card keep-text">
       <img class="card-img" :src="keep?.img" :alt="keep?.name">
@@ -61,8 +61,8 @@ export default {
 
 .creator-pic {
   border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.5em;
+  width: 2.5em;
 }
 
 .neg-marg {
